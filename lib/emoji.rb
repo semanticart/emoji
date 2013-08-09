@@ -52,6 +52,6 @@ module Emoji
   end
 
   def self.index
-    @@index ||= Index.new
+    @index ||= Index.new
   end
 end

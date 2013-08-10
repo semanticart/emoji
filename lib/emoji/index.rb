@@ -1,10 +1,6 @@
 module Emoji
   class Index
-    def initialize(emoji_list=nil)
-      emoji_list ||= begin
-        emoji_json = File.read(File.absolute_path(File.dirname(__FILE__) + '/../../config/index.json'))
-        JSON.parse(emoji_json)
-      end
+    def initialize(emoji_list=Emoji::Index.default_emoji_list)
       @emoji_by_name = {}
       @emoji_by_moji = {}
 
@@ -28,6 +24,13 @@ module Emoji
 
     def unicode_moji_regex
       @emoji_moji_regex
+    end
+
+    def self.default_emoji_list
+      @default_emoji_list ||= begin
+        emoji_json = File.read(File.absolute_path(File.dirname(__FILE__) + '/../../config/index.json'))
+        JSON.parse(emoji_json)
+      end
     end
   end
 end
